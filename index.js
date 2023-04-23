@@ -10,7 +10,23 @@ function clicked()
     console.log(this);
 
     var buttonInnerHTML = this.innerHTML;
-    switch (buttonInnerHTML) 
+    makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
+    
+  
+    //alert("i got clicked");
+}
+
+document.addEventListener("keypress", function(event) 
+{
+    //alert("key pressed");
+    makeSound(event.key);
+    buttonAnimation(event.key);
+});
+
+function makeSound(key)
+{
+  switch (key) 
     {
         case "w":
           var tom1 = new Audio ("sounds/tom-1.mp3");
@@ -49,6 +65,17 @@ function clicked()
   
         default: console.log(buttonInnerHTML);
     }
-  
-    //alert("i got clicked");
+
+}
+
+function buttonAnimation(currentKey)
+{
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+
+  setTimeout(function()
+  {
+    activeButton.classList.remove("pressed");
+  }, 100);
+
 }
